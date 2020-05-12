@@ -1,0 +1,51 @@
+Goal
+---------------------------------------------------------------------------- 
+1. make a test plan for Strapi's app bootstrapping process and then 
+2. get as far as you can in executing the plan in 4 hours. 
+3. Try to break Strapi in interesting ways while building an app with it. 
+
+---------------------------------------------------------------------------- 
+Installation Steps
+-----------------------------------------------------------------------------
+npm install strapi -g
+strapi new restaurant --quickstart
+cd restaurant
+strapi start
+
+Install Selenium jar in Eclipse - selenium-server-standalone-3.141.59.jar
+ 
+----------------------------------------------------------------------------- 
+Test Plan
+-----------------------------------------------------------------------------
+Basic Plugins installation check - can't proceed without them. 
+-------------------------
+	- Ensure below Plugins are installed
+		- Content Type Builder
+		- Content Manager 
+		- Roles & Permission
+	- find <a> with href = "/admin/plugins/content-type-builder"
+	- find <a> with href = "/admin/plugins/users-permissions"
+	- find <a> with href = "/admin/plugins/content-manager/ctm-configurations"
+	
+Contet Type Builder Test
+------------------------
+	- Click on plugin left menu item
+	- find 'Add Content Type' button, id="openAddCT"
+	- find <div> class="modal-content"
+		- div/span text()=Base Settings
+		- div/span text()=Advanced Settings
+		- Base Settings selected by default
+			- <input> id="name"; Add some text
+			- <textarea> id="description"
+			- <button> type="submit"
+		- Add attributes for this category
+			- Add String attribute
+				- again Base Setting by default selected
+				- Add name for this attribute
+				- hit 'Advanced Settings'
+				- Select 'Required' and 'Unique' check box
+				- hit Save button
+		- <button> class="close". Hit to close the modal
+	- Ensure submited content type is created and displayed in the list 
+		- <ul> id="ctbModelsList"
+			- Child element <span> text()="Restaurant"
